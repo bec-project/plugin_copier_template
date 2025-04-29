@@ -1,0 +1,24 @@
+# predefined values
+# make sure these have 'when: false' so that the questions are not asked and the items are not saved in answers.yml
+
+test_directories:
+    type: str
+    multiselect: true
+    default: ["tests_bec_ipython_client", "tests_bec_widgets", "tests_dap_services", "tests_devices", "tests_file_writer", "tests_scans"]
+    when: false
+
+copyright_year:
+    type: int
+    default: 2025
+    when: false
+
+# questions
+
+project_name:
+    type: str
+    help: What is your project name?
+
+# other configuration
+
+_tasks:
+    - "git init --initial-branch=main"
