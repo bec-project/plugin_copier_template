@@ -1,0 +1,11 @@
+from qtpy.QtWidgets import QWidget
+
+from bec_widgets.utils.bec_widget import BECWidget
+
+{% if widget_plugin.use_ui %}
+from {{ project_name }}.bec_widgets.widgets.{{ widget_plugin.module }} import {{ widget_plugin.ui_class }}
+{% endif %}
+
+class {{ widget_plugin.class }}(BECWidget, QWidget{% if widget_plugin.use_ui %}, {{ widget_plugin.ui_class }}{% endif %}):
+    def __init__(self, parent=None):
+        super().__init__(parent=parent)

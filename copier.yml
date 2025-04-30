@@ -1,3 +1,8 @@
+# imports
+
+_jinja_extensions:
+- bec_lib.utils.copier_jinja_filters.CopierFilters
+
 # predefined values
 # make sure these have 'when: false' so that the questions are not asked and the items are not saved in answers.yml
 
@@ -19,26 +24,49 @@ project_name:
     help: What is your project name?
 
 widget_plugins_input:
-    type: str
-    multiselect: true
-    default: ["test_widget_1", "test_widget_2", "another_test_widget"]
+    type: yaml
+    multiline: true
+    default: >
+            - name: test_widget_1
+              use_ui: true
+            - name: test_widget_2
+              use_ui: false
+            - name: another_test_widget
+              use_ui: true
 
-# managed by our CLI tool - e.g. generating plugins
+# derived from questions: single point of configuration for plugin class names etc
 
 widget_plugins:
     type: yaml
-    multiselect: true
+    multiline: true
     default: >
-             [{% for wp in widget_plugins_input %}
-             {
-                "module": "{{ wp }}",
-                "class": "{{ wp }}ClassName"
-             },
-             {% endfor %}]
-    when: false
+             {% for wp in widget_plugins_input %}
+              - module: {{ wp.name }}                         # Module name for the whole plugin
+                class: {{ wp.name | snake_to_pascal }}        # Class name for the plugin widget
+                use_ui: {{ wp.use_ui }}                       # Whether to create a .ui file and import it
+                {% if wp.use_ui %}
+                ui_module: {{ wp.name }}_ui                   # Module name for the compiled python UI
+                ui_class: Ui_{{ wp.name | snake_to_pascal }}  # Class name for the compiled python UI
+                {% endif %}
+             {% endfor %}
+    # when: false
 
 
 # other configuration
 
+ui_fileinfo: # would like to save this programatically when generated but don't see how
+    type: yaml
+    multiline: true
+    default: >
+             {% for wp in widget_plugins %}
+              {% if wp.use_ui %}
+              - ui_file: {{ project_name }}/bec_widgets/widgets/{{ wp.module }}/{{ wp.module }}.ui
+                out_file: {{ project_name }}/bec_widgets/widgets/{{ wp.module }}/{{ wp.ui_module }}.py
+              {% endif %}
+             {% endfor %}
+    when: false
+
 _tasks:
     - "git init --initial-branch=main"
+    - >
+      {% for info in ui_fileinfo %}pyside6-uic {{ info.ui_file }} -o {{ info.out_file }};{% endfor %}
