@@ -1,0 +1,5 @@
+from {{ project_name }}.bec_widgets.widgets.{{ widget_plugin.module }} import {{ widget_plugin.class }}Data
+
+class {{ widget_plugin.class }}:
+    def __init__(self):
+        self.data = {{ widget_plugin.class }}Data()

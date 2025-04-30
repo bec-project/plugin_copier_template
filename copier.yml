@@ -18,6 +18,26 @@ project_name:
     type: str
     help: What is your project name?
 
+widget_plugins_input:
+    type: str
+    multiselect: true
+    default: ["test_widget_1", "test_widget_2", "another_test_widget"]
+
+# managed by our CLI tool - e.g. generating plugins
+
+widget_plugins:
+    type: yaml
+    multiselect: true
+    default: >
+             [{% for wp in widget_plugins_input %}
+             {
+                "module": "{{ wp }}",
+                "class": "{{ wp }}ClassName"
+             },
+             {% endfor %}]
+    when: false
+
+
 # other configuration
 
 _tasks:
