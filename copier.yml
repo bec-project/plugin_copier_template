@@ -69,4 +69,5 @@ ui_fileinfo: # would like to save this programatically when generated but don't 
 _tasks:
     - "git init --initial-branch=main"
     - >
-      {% for info in ui_fileinfo %}pyside6-uic {{ info.ui_file }} -o {{ info.out_file }};{% endfor %}
+      {% for info in ui_fileinfo %}pyside6-uic {{ info.ui_file }} -o {{ info.out_file }};
+      {% endfor %}
