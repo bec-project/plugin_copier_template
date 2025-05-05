@@ -49,7 +49,7 @@ widget_plugins:
                 ui_class: Ui_{{ wp.name | snake_to_pascal }}  # Class name for the compiled python UI
                 {% endif %}
              {% endfor %}
-    # when: false
+    when: false
 
 
 # other configuration
