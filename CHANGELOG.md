@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v0.2.1 (2025-05-06)
+
+### Bug Fixes
+
+- Ui xml template
+  ([`3641451`](https://gitea.psi.ch/bec/bec_plugin_copier_template/commit/3641451d1960bca1e1b64d016d4669f053519fc6))
+
+
 ## v0.2.0 (2025-05-06)
 
 ### Bug Fixes
