@@ -32,7 +32,7 @@ widget_plugins_input:
     #   use_ui: whether to generate a .ui file
     type: yaml
     multiline: true
-    default: >
+    default: []
 
 # derived from questions: single point of configuration for plugin class names etc.
 
@@ -40,6 +40,8 @@ widget_plugins:
     type: yaml
     multiline: true
     default: >
+             {% if not widget_plugins_input %} []
+             {% else %}
              {% for wp in widget_plugins_input %}
               - module: {{ wp.name }}                         # Module name for the whole plugin
                 class: {{ wp.name | snake_to_pascal }}        # Class name for the plugin widget
@@ -49,6 +51,7 @@ widget_plugins:
                 ui_class: Ui_{{ wp.name | snake_to_pascal }}  # Class name for the compiled python UI
                 {% endif %}
              {% endfor %}
+             {% endif %}
     when: false
 
 
@@ -58,17 +61,22 @@ ui_fileinfo: # would like to save this programatically when generated but don't 
     type: yaml
     multiline: true
     default: >
+             {% if not widget_plugins %} []
+             {% else %}
              {% for wp in widget_plugins %}
               {% if wp.use_ui %}
               - ui_file: {{ project_name }}/bec_widgets/widgets/{{ wp.module }}/{{ wp.module }}.ui
                 out_file: {{ project_name }}/bec_widgets/widgets/{{ wp.module }}/{{ wp.ui_module }}.py
               {% endif %}
              {% endfor %}
+             {% endif %}
     when: false
 
 _tasks:
     - "git init --initial-branch=main"
     - >
+      {% if not ui_fileinfo %}
       {% for info in ui_fileinfo %}pyside6-uic {{ info.ui_file }} -o {{ info.out_file }};
       {% endfor %}
+      {% endif %}
     - "git add -A; git commit -a -m 'Init repo {{ project_name }} at template version {{ _commit }}'"
