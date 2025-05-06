@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v0.2.3 (2025-05-06)
+
+### Bug Fixes
+
+- Allow empty widget list
+  ([`b2ed638`](https://gitea.psi.ch/bec/bec_plugin_copier_template/commit/b2ed6381237632de6225b1a7b18798388bf83893))
+
+
 ## v0.2.2 (2025-05-06)
 
 ### Bug Fixes
