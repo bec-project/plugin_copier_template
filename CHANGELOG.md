@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v0.3.0 (2025-05-06)
+
+### Features
+
+- Add missing modules
+  ([`70e8ac0`](https://gitea.psi.ch/bec/bec_plugin_copier_template/commit/70e8ac0891e234ddd9e5e546072f5e13c4aea9e1))
+
+
 ## v0.2.3 (2025-05-06)
 
 ### Bug Fixes
