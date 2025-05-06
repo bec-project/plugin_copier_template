@@ -1,3 +1,6 @@
+_exclude:
+    - ".gitea/"
+
 # predefined values
 # make sure these have 'when: false' so that the questions are not asked and the items are not saved in answers.yml
 
