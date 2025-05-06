@@ -1,5 +1,6 @@
 _exclude:
     - ".gitea/"
+    - "CHANGELOG.md"
 # imports
 
 _jinja_extensions:
