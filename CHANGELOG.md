@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v0.3.1 (2025-05-06)
+
+### Bug Fixes
+
+- Modules in the right place
+  ([`e2b1db4`](https://gitea.psi.ch/bec/bec_plugin_copier_template/commit/e2b1db45442eb8dff410477273dace5e55669bbd))
+
+
 ## v0.3.0 (2025-05-06)
 
 ### Features
