@@ -32,12 +32,6 @@ widget_plugins_input:
     type: yaml
     multiline: true
     default: >
-            - name: test_widget_1
-              use_ui: true
-            - name: test_widget_2
-              use_ui: false
-            - name: another_test_widget
-              use_ui: true
 
 # derived from questions: single point of configuration for plugin class names etc.
 
