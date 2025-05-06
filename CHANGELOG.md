@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v0.2.2 (2025-05-06)
+
+### Bug Fixes
+
+- Exclude changelog from template
+  ([`4b44b7b`](https://gitea.psi.ch/bec/bec_plugin_copier_template/commit/4b44b7b599c3f27af153120a8529a20d164393f3))
+
+
 ## v0.2.1 (2025-05-06)
 
 ### Bug Fixes
