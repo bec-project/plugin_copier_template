@@ -1,5 +1,6 @@
 _exclude:
     - ".gitea/"
+    - ".git/"
     - "CHANGELOG.md"
 # imports
 
