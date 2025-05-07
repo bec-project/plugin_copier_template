@@ -75,7 +75,8 @@ ui_fileinfo: # would like to save this programatically when generated but don't 
 _tasks:
     - "git init --initial-branch=main"
     - >
-      {% if not ui_fileinfo %}
+      {% if not ui_fileinfo %} echo "No .ui files to process"
+      {% else %}
       {% for info in ui_fileinfo %}pyside6-uic {{ info.ui_file }} -o {{ info.out_file }};
       {% endfor %}
       {% endif %}
