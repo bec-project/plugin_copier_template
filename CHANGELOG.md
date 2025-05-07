@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v0.3.3 (2025-05-07)
+
+### Bug Fixes
+
+- Exclude .git from template
+  ([`b77ba35`](https://gitea.psi.ch/bec/bec_plugin_copier_template/commit/b77ba350c37dc466d87ac885677a45b16ef0274d))
+
+
 ## v0.3.2 (2025-05-07)
 
 ### Bug Fixes
