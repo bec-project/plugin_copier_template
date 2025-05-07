@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v0.3.2 (2025-05-07)
+
+### Bug Fixes
+
+- Run compiler if there are ui files
+  ([`53f243e`](https://gitea.psi.ch/bec/bec_plugin_copier_template/commit/53f243e4555779d95b13101eaf6596be392421a0))
+
+
 ## v0.3.1 (2025-05-06)
 
 ### Bug Fixes
