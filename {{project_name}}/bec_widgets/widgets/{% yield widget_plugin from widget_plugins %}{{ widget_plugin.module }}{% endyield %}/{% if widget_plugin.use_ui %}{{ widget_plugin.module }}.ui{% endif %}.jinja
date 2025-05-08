@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
-    <class>{{ widget_plugin.class | stash_filename }}</class>
-    <widget class="QWidget" name="{{ widget_plugin.class }}">
+    <class>{{ widget_plugin.class }}</class>
+    <widget class="QWidget" name="{{ widget_plugin.module | snake_to_camel }}">
     </widget>
     <resources />
     <connections />
