@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v0.3.5 (2025-05-09)
+
+### Bug Fixes
+
+- Exclude copier.yml from template
+  ([`8d33e8c`](https://gitea.psi.ch/bec/bec_plugin_copier_template/commit/8d33e8c2eb1dd1e9ac4f34cfbcf0e1fad73792e1))
+
+
 ## v0.3.4 (2025-05-09)
 
 ### Bug Fixes
