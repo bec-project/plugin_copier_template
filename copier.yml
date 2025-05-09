@@ -2,6 +2,7 @@ _exclude:
     - ".gitea/"
     - ".git/"
     - "CHANGELOG.md"
+    - "copier.yml"
 # imports
 
 _jinja_extensions:
