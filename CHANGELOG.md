@@ -1,6 +1,17 @@
 # CHANGELOG
 
 
+## v0.3.4 (2025-05-09)
+
+### Bug Fixes
+
+- Checkout action in release workflow
+  ([`46a2a9d`](https://gitea.psi.ch/bec/bec_plugin_copier_template/commit/46a2a9d21451c4edaac78c468d0fa67a38f7d0b4))
+
+- Remove unused filter
+  ([`c807b4a`](https://gitea.psi.ch/bec/bec_plugin_copier_template/commit/c807b4a0dc508b8813422eaf24949d97f12c0ed8))
+
+
 ## v0.3.3 (2025-05-07)
 
 ### Bug Fixes
