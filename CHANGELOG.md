@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v0.3.6 (2025-05-09)
+
+### Bug Fixes
+
+- Commit message on update
+  ([`100bea9`](https://gitea.psi.ch/bec/bec_plugin_copier_template/commit/100bea97d381ec8ffc03f1f317d29d47ca1ca5dc))
+
+
 ## v0.3.5 (2025-05-09)
 
 ### Bug Fixes
