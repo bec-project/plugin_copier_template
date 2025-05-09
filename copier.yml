@@ -75,11 +75,16 @@ ui_fileinfo: # would like to save this programatically when generated but don't 
     when: false
 
 _tasks:
-    - "git init --initial-branch=main"
+    - "{% if _copier_operation == 'copy' %} git init --initial-branch=main {% endif %}"
     - >
       {% if not ui_fileinfo %} echo "No .ui files to process"
       {% else %}
       {% for info in ui_fileinfo %}pyside6-uic {{ info.ui_file }} -o {{ info.out_file }};
       {% endfor %}
       {% endif %}
-    - "git add -A; git commit -a -m 'Init repo {{ project_name }} at template version {{ _commit }}'"
+    - >
+      {% if _copier_operation == 'copy' %}
+      git add -A; git commit -a -m 'Init repo {{ project_name }} at template version {{ _commit }}'
+      {% else %}
+      git add -A; git commit -a -m 'Update repo with template version {{ _commit }}'
+      {% endif %}
