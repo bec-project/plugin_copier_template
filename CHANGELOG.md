@@ -1,6 +1,34 @@
 # CHANGELOG
 
 
+## v1.0.0 (2025-05-12)
+
+### Continuous Integration
+
+- Add ssh key for semantic-release
+  ([`8799ea9`](https://gitea.psi.ch/bec/bec_plugin_copier_template/commit/8799ea99c4c54d64e408ccdd520d3e2a43193045))
+
+- Add ssh known hosts
+  ([`f0eea4a`](https://gitea.psi.ch/bec/bec_plugin_copier_template/commit/f0eea4a9fb75cb52c84a22d6e982d7e82111f4d9))
+
+- Fix release settings and add prerelease option
+  ([`1a4bbe6`](https://gitea.psi.ch/bec/bec_plugin_copier_template/commit/1a4bbe658268008f416100c5bd9945b7a5c9010d))
+
+- Use ssh for release push
+  ([`39bbd5e`](https://gitea.psi.ch/bec/bec_plugin_copier_template/commit/39bbd5e79c97e4ebb87a4a9393ed1d84416ce0af))
+
+### Features
+
+- Move template into subdirectory
+  ([`79845f7`](https://gitea.psi.ch/bec/bec_plugin_copier_template/commit/79845f76978e37d467db3a2338916d3ee9fb08f3))
+
+BREAKING CHANGE: reorganises repo, arbitrary choice for v1 release
+
+### Breaking Changes
+
+- Reorganises repo, arbitrary choice for v1 release
+
+
 ## v0.4.0 (2025-05-12)
 
 ### Features
