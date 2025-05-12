@@ -2,6 +2,10 @@
 match = "(main)"
 prerelease = false
 
+[tool.semantic_release.branches.test]
+match = "(test_release)"
+prerelease = true
+
 [tool.semantic_release.commit_author]
 env = "GIT_COMMIT_AUTHOR"
 default = "semantic-release <semantic-release>"
