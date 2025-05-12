@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v0.4.0 (2025-05-12)
+
+### Features
+
+- Ask whether to make commit
+  ([`9275f19`](https://gitea.psi.ch/bec/bec_plugin_copier_template/commit/9275f19a263d8386c4e29efc28803e3f8ff67a44))
+
+
 ## v0.3.6 (2025-05-09)
 
 ### Bug Fixes
