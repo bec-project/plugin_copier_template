@@ -1,10 +1,7 @@
-_exclude:
-    - ".gitea/"
-    - ".git/"
-    - "CHANGELOG.md"
-    - "copier.yml"
-# imports
+# repo config
+_subdirectory: template
 
+# imports
 _jinja_extensions:
 - bec_lib.utils.copier_jinja_filters.CopierFilters
 
