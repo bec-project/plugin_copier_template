@@ -28,6 +28,11 @@ project_name:
     type: str
     help: What is your project name?
 
+make_commit:
+    type: bool
+    help: would you like to automatically stage and commit the changes?
+    default: true
+
 widget_plugins_input:
     # Defines the list of plugin widgets, following:
     # - name: widget name in snake case
@@ -83,8 +88,12 @@ _tasks:
       {% endfor %}
       {% endif %}
     - >
+      {% if make_commit %}
       {% if _copier_operation == 'copy' %}
       git add -A; git commit -a -m 'Init repo {{ project_name }} at template version {{ _commit }}'
       {% else %}
       git add -A; git commit -a -m 'Update repo with template version {{ _commit }}'
+      {% endif %}
+      {% else %}
+      echo "Autocommit disabled, leaving repo dirty"
       {% endif %}
