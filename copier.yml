@@ -79,18 +79,33 @@ ui_fileinfo: # would like to save this programatically when generated but don't 
 _tasks:
     - "{% if _copier_operation == 'copy' %} git init --initial-branch=main {% endif %}"
     - >
-      {% if not ui_fileinfo %} echo "No .ui files to process"
+      {% if not ui_fileinfo %} echo "No .ui files to process";
       {% else %}
       {% for info in ui_fileinfo %}pyside6-uic {{ info.ui_file }} -o {{ info.out_file }};
       {% endfor %}
       {% endif %}
     - >
       {% if make_commit %}
+      echo "making autocommit in $(pwd)";
       {% if _copier_operation == 'copy' %}
       git add -A; git commit -a -m 'Init repo {{ project_name }} at template version {{ _commit }}'
-      {% else %}
-      git add -A; git commit -a -m 'Update repo with template version {{ _commit }}'
       {% endif %}
       {% else %}
       echo "Autocommit disabled, leaving repo dirty"
       {% endif %}
+
+_migrations:
+    - stage: after
+      command: >
+        {% if make_commit %}
+        echo "making autocommit in $(pwd)";
+        {% if _copier_operation == 'copy' %}
+        git add -A; git commit -a -m 'Init repo {{ project_name }} at template version {{ _commit }}'
+        {% else %}
+        git add -A; git commit -a -m 'Update repo with template version {{ _commit }}'
+        {% endif %}
+        {% else %}
+        echo "Autocommit disabled, leaving repo dirty"
+        {% endif %}
+    - stage: after
+      command: pre-commit install
