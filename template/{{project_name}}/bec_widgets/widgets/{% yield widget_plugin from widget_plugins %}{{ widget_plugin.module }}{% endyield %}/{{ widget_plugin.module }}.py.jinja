@@ -7,5 +7,5 @@ from {{ project_name }}.bec_widgets.widgets.{{ widget_plugin.module }}.{{ widget
 {% endif %}
 
 class {{ widget_plugin.class }}(BECWidget, QWidget{% if widget_plugin.use_ui %}, {{ widget_plugin.ui_class }}{% endif %}):
-    def __init__(self, parent=None):
-        super().__init__(parent=parent)
+    def __init__(self, parent=None, **kwargs):
+        super().__init__(parent=parent, **kwargs)
