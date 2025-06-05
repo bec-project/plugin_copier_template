@@ -29,8 +29,8 @@ default_bump_level = 0
 
 [tool.semantic_release.remote]
 name = "origin"
-type = "gitea"
-domain = "https://gitea.psi.ch"
+type = "github"
+domain = "https://www.github.com"
 ignore_token_for_push = true
 
 [tool.semantic_release.remote.token]
