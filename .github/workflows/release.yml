@@ -22,4 +22,4 @@ jobs:
       - name: run_release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: pipx run python-semantic-release -c .gitea/semantic_release.toml version
+        run: pipx run python-semantic-release -c .github/semantic_release.toml version
