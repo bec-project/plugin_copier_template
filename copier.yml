@@ -107,5 +107,3 @@ _migrations:
         {% else %}
         echo "Autocommit disabled, leaving repo dirty"
         {% endif %}
-    - stage: after
-      command: pre-commit install
