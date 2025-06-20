@@ -52,7 +52,7 @@ widget_plugins:
                 use_ui: {{ wp.use_ui }}                       # Whether to create a .ui file and import it
                 {% if wp.use_ui %}
                 ui_module: {{ wp.name }}_ui                   # Module name for the compiled python UI
-                ui_class: Ui_{{ wp.name | snake_to_pascal }}  # Class name for the compiled python UI
+                ui_class: Ui_{{ wp.name | snake_to_camel }}  # Class name for the compiled python UI
                 {% endif %}
              {% endfor %}
              {% endif %}

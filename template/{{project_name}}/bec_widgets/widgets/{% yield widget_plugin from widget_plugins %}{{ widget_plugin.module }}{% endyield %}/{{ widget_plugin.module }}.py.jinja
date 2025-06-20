@@ -8,4 +8,15 @@ from {{ project_name }}.bec_widgets.widgets.{{ widget_plugin.module }}.{{ widget
 
 class {{ widget_plugin.class }}(BECWidget, QWidget{% if widget_plugin.use_ui %}, {{ widget_plugin.ui_class }}{% endif %}):
     def __init__(self, parent=None, **kwargs):
-        super().__init__(parent=parent, **kwargs)
+        super().__init__(parent=parent, **kwargs){% if widget_plugin.use_ui %}
+        self.setupUi(self){% endif %}
+
+if __name__ == "__main__":
+    import sys
+
+    from qtpy.QtWidgets import QApplication
+
+    app = QApplication(sys.argv)
+    widget = {{ widget_plugin.class }}()
+    widget.show()
+    sys.exit(app.exec())
