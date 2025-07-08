@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
-    <class>{{ widget_plugin.class }}</class>
-    <widget class="QWidget" name="{{ widget_plugin.module | snake_to_camel }}">
-    </widget>
-    <resources />
-    <connections />
+ <class>{{ widget_plugin.module | snake_to_camel }}</class>
+ <widget class="QWidget" name="{{ widget_plugin.module | snake_to_camel }}">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>150</width>
+    <height>150</height>
+   </rect>
+  </property>
+ </widget>
+ <resources/>
+ <connections/>
 </ui>
