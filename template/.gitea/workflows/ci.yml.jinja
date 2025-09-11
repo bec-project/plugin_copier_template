@@ -94,4 +94,4 @@ jobs:
 
       - name: Run Pytest with Coverage
         id: coverage
-        run: pytest --random-order --cov=./{{ project_name }} --cov-config=./{{ project_name }}/pyproject.toml --cov-branch --cov-report=xml --no-cov-on-fail ./{{ project_name }}/tests/
+        run: pytest --random-order --cov=./{{ project_name }} --cov-config=./{{ project_name }}/pyproject.toml --cov-branch --cov-report=xml --no-cov-on-fail ./{{ project_name }}/tests/ || test $? -eq 5
