@@ -44,34 +44,34 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: ${{ inputs.PYTHON_VERSION || '3.11' }}
+          python-version: "{% raw %}${{ inputs.PYTHON_VERSION || '3.11' }}{% endraw %}"
 
       - name: Checkout BEC Core
         uses: actions/checkout@v4
         with:
           repository: bec/bec
-          ref: ${{ inputs.BEC_CORE_BRANCH || 'main' }}
+          ref: "{% raw %}${{ inputs.BEC_CORE_BRANCH || 'main' }}{% endraw %}"
           path: ./bec
 
       - name: Checkout Ophyd Devices
         uses: actions/checkout@v4
         with:
           repository: bec/ophyd_devices
-          ref: ${{ inputs.OPHYD_DEVICES_BRANCH || 'main' }}
+          ref: "{% raw %}${{ inputs.OPHYD_DEVICES_BRANCH || 'main' }}{% endraw %}"
           path: ./ophyd_devices
 
       - name: Checkout BEC Widgets
         uses: actions/checkout@v4
         with:
           repository: bec/bec_widgets
-          ref: ${{ inputs.BEC_WIDGETS_BRANCH || 'main' }}
+          ref: "{% raw %}${{ inputs.BEC_WIDGETS_BRANCH || 'main' }}{% endraw %}"
           path: ./bec_widgets
 
       - name: Checkout BEC Plugin Repository
         uses: actions/checkout@v4
         with:
           repository: bec/{{ project_name }}
-          ref: ${{ inputs.BEC_PLUGIN_REPO_BRANCH || github.head_ref || github.sha }}
+          ref: "{% raw %}${{ inputs.BEC_PLUGIN_REPO_BRANCH || github.head_ref || github.sha }}{% endraw %}"
           path: ./{{ project_name }}
 
       - name: Install dependencies
