@@ -1,0 +1,27 @@
+name: Update Beamline Plugin Repositories
+on:
+  workflow_dispatch
+
+jobs:
+  update_beamline_plugins:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        repo_name: ["addams_bec",
+                    "csaxs_bec",
+                    "debye_bec",
+                    "microxas_bec",
+                    "phoenix_bec",
+                    "pxi_bec",
+                    "pxii_bec",
+                    "pxiii_bec",
+                    "sim_bec",
+                    "superxas_bec",
+                    "tomcat_bec",
+                    "xtreme_bec"]
+    steps:
+      - uses: ./.github/actions/trigger_child_update
+        with:
+          REPO_NAME: ${{ matrix.repo_name }}
+    
+
