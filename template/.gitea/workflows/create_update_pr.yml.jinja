@@ -1,0 +1,43 @@
+name: Create template upgrade PR for {{ project_name }}
+on:
+  workflow_dispatch:
+
+permissions:
+  pull-requests: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+    
+      - name: Install tools
+        run: |
+          pip install copier
+
+      - name: Checkout
+        uses: actions/checkout@v4
+    
+      - name: Perform update
+        run: |
+          branch="chore/update-template-$(python -m uuid)"
+          git checkout -b $branch
+          msg = $(copier update --trust --defaults --conflict inline 2>&1 | sed -n 1p)
+          git add -A
+          git diff-index --quiet HEAD || git commit -a -m $msg
+          git push -u origin $branch
+
+          curl -X POST \
+          -H "Authorization: token ${GITEA_TOKEN}" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "head": "'"${branch}"'",
+            "base": "main",
+            "title": "Upgrade template base",
+            "body": ""
+          }' \
+          "https://gitea.psi.ch/api/v1/repos/bec/{{ project_name }}/pulls"
