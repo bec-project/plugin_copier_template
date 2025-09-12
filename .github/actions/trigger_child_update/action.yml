@@ -1,0 +1,20 @@
+name: "Trigger update pipeline"
+description: "Call a workflow"
+inputs:
+  REPO_NAME:
+    required: true
+    description: "Identifier of the repo in which to trigger an update"
+
+
+runs:
+  using: "composite"
+  steps:
+    - name: create update in child repo
+      shell: bash
+      run: |
+        curl -X 'POST' \
+        "https://gitea.psi.ch/api/v1/repos/bec/${{ inputs.REPO_NAME }}/actions/workflows/create_update_pr.yml/dispatches?token=${{ secrets.CI_DEPLOY_GITEA }}" \
+        -H 'accept: application/json' \
+        -H 'Content-Type: application/json' \
+        \"ref\": \"refs/heads/main\"
+        }"

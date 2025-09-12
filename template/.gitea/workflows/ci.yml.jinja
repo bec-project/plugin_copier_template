@@ -46,6 +46,17 @@ jobs:
         with:
           python-version: "{% raw %}${{ inputs.PYTHON_VERSION || '3.11' }}{% endraw %}"
 
+      - name: Checkout BEC Plugin Repository
+        uses: actions/checkout@v4
+        with:
+          repository: bec/{{ project_name }}
+          ref: "{% raw %}${{ inputs.BEC_PLUGIN_REPO_BRANCH || github.head_ref || github.sha }}{% endraw %}"
+          path: ./{{ project_name }}
+
+      - name: Lint for merge conflicts
+        run: |
+          
+
       - name: Checkout BEC Core
         uses: actions/checkout@v4
         with:
@@ -66,13 +77,6 @@ jobs:
           repository: bec/bec_widgets
           ref: "{% raw %}${{ inputs.BEC_WIDGETS_BRANCH || 'main' }}{% endraw %}"
           path: ./bec_widgets
-
-      - name: Checkout BEC Plugin Repository
-        uses: actions/checkout@v4
-        with:
-          repository: bec/{{ project_name }}
-          ref: "{% raw %}${{ inputs.BEC_PLUGIN_REPO_BRANCH || github.head_ref || github.sha }}{% endraw %}"
-          path: ./{{ project_name }}
 
       - name: Install dependencies
         shell: bash
