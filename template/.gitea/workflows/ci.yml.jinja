@@ -28,7 +28,7 @@ on:
         description: "Python version to use"
         required: false
         type: string
-        default: "3.11"
+        default: "3.12"
 
 permissions:
   pull-requests: write
@@ -44,7 +44,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: "{% raw %}${{ inputs.PYTHON_VERSION || '3.11' }}{% endraw %}"
+          python-version: "{% raw %}${{ inputs.PYTHON_VERSION || '3.12' }}{% endraw %}"
 
       - name: Checkout BEC Plugin Repository
         uses: actions/checkout@v4
