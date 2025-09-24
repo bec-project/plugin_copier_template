@@ -20,6 +20,9 @@ jobs:
                     "tomcat_bec",
                     "xtreme_bec"]
     steps:
+      - name: Checkout repo 
+        uses: actions/checkout@v4
+
       - uses: ./.github/actions/trigger_child_update
         with:
           REPO_NAME: ${{ matrix.repo_name }}
