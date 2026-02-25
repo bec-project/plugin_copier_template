@@ -1,0 +1,14 @@
+name: Test beamline repo names variable
+on:
+  push
+
+jobs:
+  update_beamline_plugins:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        repo_name: ${{ fromJSON(vars.BEAMLINE_REPO_NAMES) }}
+    steps:
+      - run: echo "running workflow for ${{ matrix.repo_name }}"
+    
+
