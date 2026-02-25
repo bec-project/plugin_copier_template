@@ -77,6 +77,13 @@ ui_fileinfo: # would like to save this programatically when generated but don't 
     when: false
 
 _tasks:
+    - stage: before
+      when: "{{ _copier_operation == 'copy' }}"
+      command: >
+        if [ "$COPIER_DST_PATH" = "." ] || [ "$COPIER_DST_PATH" = "$(pwd)" ]; then
+            echo "ERROR: You must specify a target directory. Do not run Copier in '.'"
+            exit 1
+        fi
     - "{% if _copier_operation == 'copy' %} git init --initial-branch=main {% endif %}"
     - >
       {% if not ui_fileinfo %} echo "No .ui files to process";
