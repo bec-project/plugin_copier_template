@@ -5,6 +5,12 @@ _subdirectory: template
 _jinja_extensions:
 - bec_lib.utils.copier_jinja_filters.CopierFilters
 
+_message_before_copy: |
+    WARNING!
+    Please remember that this operation will create a git repository. If you didn't specify a target it will run in the current directory. If you don't want to create a new git repository in the  specified directory you can press ctrl-c to cancel the operation.
+    
+    It is recommended to always specify a target directory.
+
 # predefined values
 # make sure these have 'when: false' so that the questions are not asked and the items are not saved in answers.yml
 
