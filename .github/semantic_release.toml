@@ -1,3 +1,6 @@
+[tool.semantic_release]
+build_command = "echo 'Nothing to build :)'"
+
 [tool.semantic_release.branches.main]
 match = "(main)"
 prerelease = false
