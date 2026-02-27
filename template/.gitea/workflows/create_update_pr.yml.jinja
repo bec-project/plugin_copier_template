@@ -6,8 +6,11 @@ permissions:
   pull-requests: write
 
 jobs:
-  test:
+  create_update_branch_and_pr:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
 
     steps:
       - name: Setup Python
@@ -17,16 +20,43 @@ jobs:
     
       - name: Install tools
         run: |
-          pip install copier
+          pip install copier PySide6
 
       - name: Checkout
         uses: actions/checkout@v4
     
       - name: Perform update
         run: |
+          git config --global user.email "bec_ci_staging@psi.ch"
+          git config --global user.name "BEC automated CI"
+
           branch="chore/update-template-$(python -m uuid)"
+          echo "switching to branch $branch"
           git checkout -b $branch
-          msg = $(copier update --trust --defaults --conflict inline 2>&1 | sed -n 1p)
-          git add -A
-          git diff-index --quiet HEAD || git commit -a -m $msg
+
+          echo "Running copier update..."
+          output="$(copier update --trust --defaults --conflict inline 2>&1)"
+          echo "$output"
+          msg="$(printf '%s\n' "$output" | head -n 1)"
+
+          if ! grep -q "make_commit: true" .copier-answers.yml ; then
+            echo "Autocommit not made, committing..."
+            git add -A
+            git commit -a -m "$msg"
+          fi
+
+          if diff-index --quiet HEAD ; then
+            echo "No changes detected"
+            exit 0
+          fi
+
           git push -u origin $branch
+          curl -X POST "https://gitea.psi.ch/api/v1/repos/${{ gitea.repository }}/pulls" \
+            -H "Authorization: token ${{ secrets.CI_REPO_WRITE }}" \
+            -H "Content-Type: application/json" \
+            -d "{
+                  \"title\": \"Template: $(echo $msg)\",
+                  \"body\": \"This PR was created by Gitea Actions\",
+                  \"head\": \"$(echo $branch)\",
+                  \"base\": \"main\"
+                }"
