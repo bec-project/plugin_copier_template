@@ -53,9 +53,10 @@ jobs:
           ref: "{% raw %}${{ inputs.BEC_PLUGIN_REPO_BRANCH || github.head_ref || github.sha }}{% endraw %}"
           path: ./{{ project_name }}
 
-      - name: Lint for merge conflicts
-        run: |
-          
+      - name: Lint for merge conflicts from template updates
+        shell: bash
+        # Find all Copier conflicts except this line
+        run: '! grep -r "<<<<<<< before updating" | grep -v "grep -r \"<<<<<<< before updating"'
 
       - name: Checkout BEC Core
         uses: actions/checkout@v4
