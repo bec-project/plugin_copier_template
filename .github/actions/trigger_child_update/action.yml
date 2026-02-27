@@ -13,8 +13,9 @@ runs:
       shell: bash
       run: |
         curl -X 'POST' \
-        "https://gitea.psi.ch/api/v1/repos/bec/${{ inputs.REPO_NAME }}/actions/workflows/create_update_pr.yml/dispatches?token=${{ secrets.CI_DEPLOY_GITEA }}" \
-        -H 'accept: application/json' \
-        -H 'Content-Type: application/json' \
-        \"ref\": \"refs/heads/main\"
+        "https://gitea.psi.ch/api/v1/repos/bec/${{ inputs.REPO_NAME }}/actions/workflows/create_update_pr.yml/dispatches" \
+        -H "Authorization: token ${{ secrets.CI_GITEA_WORKFLOW }}" \
+        -H "Content-Type: application/json" \
+        -d "{
+          \"ref\": \"refs/heads/main\"
         }"
