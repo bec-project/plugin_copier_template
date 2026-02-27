@@ -51,8 +51,8 @@ jobs:
           fi
 
           git push -u origin $branch
-          curl -X POST "https://gitea.psi.ch/api/v1/repos/${{ gitea.repository }}/pulls" \
-            -H "Authorization: token ${{ secrets.CI_REPO_WRITE }}" \
+          curl -X POST "https://gitea.psi.ch/api/v1/repos/{{ "${{ gitea.repository }}" }}/pulls" \
+            -H "Authorization: token {{ "${{ secrets.CI_REPO_WRITE }}" }}" \
             -H "Content-Type: application/json" \
             -d "{
                   \"title\": \"Template: $(echo $msg)\",
