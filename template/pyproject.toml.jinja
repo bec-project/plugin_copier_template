@@ -39,6 +39,9 @@ plugin_file_writer = "{{ project_name }}.file_writer"
 [project.entry-points."bec.scans"]
 plugin_scans = "{{ project_name }}.scans"
 
+[project.entry-points."bec.scans.scan_modifier"]
+plugin_scan_modifier = "{{ project_name }}.scans.scan_customization.scan_modifier"
+
 [project.entry-points."bec.scans.metadata_schema"]
 plugin_metadata_schema = "{{ project_name }}.scans.metadata_schema"
 
