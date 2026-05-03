@@ -1,0 +1,12 @@
+"""
+Scan components for {{ project_name }}.
+
+The scan components module allows you to define custom components that can be used in your scans.
+These components can be used to encapsulate reusable logic, interact with devices, or perform specific actions during the scan lifecycle.
+"""
+
+from bec_server.scan_server.scans.scan_components import ScanComponents
+
+{% set project_name_pascal = project_name|replace("_", " ")|title|replace(" ", "") %}
+class {{ project_name_pascal }}ScanComponents(ScanComponents):
+    """Scan components for {{ project_name }}."""
