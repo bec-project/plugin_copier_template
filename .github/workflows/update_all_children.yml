@@ -1,6 +1,5 @@
 name: Update Beamline Plugin Repositories
-on:
-  workflow_dispatch
+on: workflow_dispatch
 
 jobs:
   update_beamline_plugins:
@@ -13,3 +12,4 @@ jobs:
       - uses: ./.github/actions/trigger_child_update
         with:
           REPO_NAME: ${{ matrix.repo_name }}
+          CI_GITEA_WORKFLOW_TOKEN: ${{ secrets.CI_GITEA_WORKFLOW }}
