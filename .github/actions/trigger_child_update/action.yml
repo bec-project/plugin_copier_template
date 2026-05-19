@@ -4,7 +4,9 @@ inputs:
   REPO_NAME:
     required: true
     description: "Identifier of the repo in which to trigger an update"
-
+  CI_GITEA_WORKFLOW_TOKEN:
+    required: true
+    description: Token used to authenticate with Gitea
 
 runs:
   using: "composite"
@@ -14,7 +16,7 @@ runs:
       run: |
         curl -X 'POST' \
         "https://gitea.psi.ch/api/v1/repos/bec/${{ inputs.REPO_NAME }}/actions/workflows/create_update_pr.yml/dispatches" \
-        -H "Authorization: token ${{ secrets.CI_GITEA_WORKFLOW }}" \
+        -H "Authorization: token ${{ inputs.CI_GITEA_WORKFLOW_TOKEN }}" \
         -H "Content-Type: application/json" \
         -d "{
           \"ref\": \"refs/heads/main\"
