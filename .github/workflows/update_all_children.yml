@@ -9,8 +9,7 @@ jobs:
       matrix:
         repo_name: ${{ fromJSON(vars.BEAMLINE_REPO_NAMES) }}
     steps:
+      - uses: actions/checkout@v5
       - uses: ./.github/actions/trigger_child_update
         with:
           REPO_NAME: ${{ matrix.repo_name }}
-    
-
