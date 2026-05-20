@@ -18,15 +18,21 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Install tools
-        run: |
-          pip install copier PySide6 bec_lib
-
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Create virtualenv
+	    run: |
+	      python -m virtualenv .venv
+
+      - name: Install tools
+        run: |
+          source .venv/bin/activate
+          pip install copier PySide6 bec_lib
+
       - name: Perform update
         run: |
+          source .venv/bin/activate
           git config --global user.email "bec_ci_staging@psi.ch"
           git config --global user.name "BEC automated CI"
 
@@ -35,8 +41,9 @@ jobs:
           git checkout -b $branch
 
           echo "Running copier update..."
-          copier update --trust --defaults --conflict inline 2>&1 | tee ../copier.log
-          output="$(cat ../copier.log)"
+          copier update --trust --defaults --conflict inline 2>&1 | tee copier.log
+          status=${PIPESTATUS[0]}
+          output="$(cat copier.log)"
           echo $output
           msg="$(printf '%s\n' "$output" | head -n 1)"
 
