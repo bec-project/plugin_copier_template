@@ -35,9 +35,8 @@ jobs:
           git checkout -b $branch
 
           echo "Running copier update..."
-          copier update --trust --defaults --conflict inline 2>&1 | tee copier.log
-          status=${PIPESTATUS[0]}
-          output="$(cat copier.log)"
+          copier update --trust --defaults --conflict inline 2>&1 | tee ../copier.log
+          output="$(cat ../copier.log)"
           echo $output
           msg="$(printf '%s\n' "$output" | head -n 1)"
 
