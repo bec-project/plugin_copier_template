@@ -36,6 +36,9 @@ plugin_ds_startup = "{{ project_name }}.deployments.device_server.startup:run"
 [project.entry-points."bec.file_writer"]
 plugin_file_writer = "{{ project_name }}.file_writer"
 
+[project.entry-points."bec.file_writer.storage_copy"]
+plugin_storage_copy = "{{ project_name }}.file_writer.storage_copy:plugin_storage_copy"
+
 [project.entry-points."bec.scans"]
 plugin_scans = "{{ project_name }}.scans"
 
