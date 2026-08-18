@@ -95,8 +95,19 @@ jobs:
           uv pip install --system -e ./bec/bec_ipython_client
           uv pip install --system -e ./bec/bec_server[dev]
           uv pip install --system -e ./bec_widgets[dev,pyside6]
-          uv pip install --system -e ./{{ project_name }}
+          uv pip install --system -e ./{{ project_name }}[dev]
 
-      - name: Run Pytest with Coverage
+      - name: Run Tests with Coverage
         id: coverage
-        run: pytest --random-order --cov=./{{ project_name }} --cov-config=./{{ project_name }}/pyproject.toml --cov-branch --cov-report=xml --no-cov-on-fail ./{{ project_name }}/tests/ || test $? -eq 5
+        shell: bash
+        run: |
+          set +e
+          coverage run --branch --source=./{{ project_name }} -m pytest --random-order ./{{ project_name }}/tests/
+          status=$?
+          # Allow pytest exit code 5 so repositories without tests do not fail CI.
+          if [ "$status" -ne 0 ] && [ "$status" -ne 5 ]; then
+            exit "$status"
+          fi
+          if [ "$status" -eq 0 ]; then
+            coverage report
+          fi
