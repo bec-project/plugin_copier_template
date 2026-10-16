@@ -1,0 +1,52 @@
+name: Read the Docs Deploy Trigger
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  trigger-rtd-webhook:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check whether documentation is enabled
+        id: docs-config
+        shell: bash
+        run: |
+          python - <<'PY'
+          import os
+          import tomllib
+
+          with open("pyproject.toml", "rb") as source:
+              config = tomllib.load(source)
+          enabled = config.get("tool", {}).get("bec", {}).get("docs_enabled", False)
+          if not isinstance(enabled, bool):
+              raise ValueError("tool.bec.docs_enabled must be a boolean")
+          with open(os.environ["GITHUB_OUTPUT"], "a") as output:
+              output.write(f"enabled={str(enabled).lower()}\n")
+          print(f"Documentation enabled: {enabled}")
+          PY
+
+      - name: Trigger Read the Docs webhook
+        if: {% raw %}${{ steps.docs-config.outputs.enabled == 'true' }}{% endraw %}
+        env:
+          RTD_TOKEN: {% raw %}${{ secrets.RTD_TOKEN }}{% endraw %}
+          RTD_WEBHOOK_URL: {% raw %}${{ secrets.RTD_WEBHOOK_URL }}{% endraw %}
+          RTD_BRANCH: {% raw %}${{ github.ref_name }}{% endraw %}
+        run: |
+          : "${RTD_TOKEN:?Set the RTD_TOKEN repository secret}"
+          : "${RTD_WEBHOOK_URL:?Set the RTD_WEBHOOK_URL repository secret}"
+          curl --fail --show-error --silent \
+            -X POST \
+            --data-urlencode "branches=${RTD_BRANCH}" \
+            --data-urlencode "token=${RTD_TOKEN}" \
+            "$RTD_WEBHOOK_URL"

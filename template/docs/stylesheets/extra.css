@@ -1,0 +1,48 @@
+/* Keep section cards balanced when icon proportions and title lengths differ. */
+.md-typeset .section-grid {
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
+  gap: 1rem;
+}
+
+.md-typeset .section-grid.cards > ul > li {
+  position: relative;
+  padding: 1.1rem;
+}
+
+/* Stretch the existing heading link across its card without extra tab stops. */
+.md-typeset .section-grid .card-heading a::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+}
+
+.md-typeset .section-grid.cards > ul > li:focus-within {
+  outline: 2px solid var(--md-accent-fg-color);
+  outline-offset: 2px;
+}
+
+.md-typeset .section-grid .card-heading {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  min-height: 2.6rem;
+  margin: 0 0 0.8rem;
+  line-height: 1.4;
+}
+
+.md-typeset .section-grid .card-heading strong {
+  font-size: 0.85rem;
+}
+
+.md-typeset .section-grid .card-heading a {
+  text-decoration: none;
+}
+
+.md-typeset .section-grid .card-heading a:hover,
+.md-typeset .section-grid .card-heading a:focus-visible {
+  text-decoration: underline;
+}
+
+.md-typeset .section-grid .card-heading + p {
+  margin: 0;
+}
