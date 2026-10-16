@@ -15,6 +15,7 @@ classifiers = [
 dependencies = []
 
 [project.optional-dependencies]
+docs = ["zensical>=0.0.66", "pymdown-extensions"]
 dev = [
     "black",
     "copier",
@@ -57,6 +58,10 @@ plugin_widgets_update = "{{ project_name }}.bec_widgets.auto_updates"
 
 [project.entry-points."bec.widgets.user_widgets"]
 plugin_widgets = "{{ project_name }}.bec_widgets.widgets"
+
+[tool.bec]
+# Set to true to opt in to using the documentation docs/.
+docs_enabled = false
 
 [tool.hatch.build.targets.wheel]
 include = ["*"]
